@@ -1,14 +1,14 @@
 require linux.inc
 require kselftests.inc
 
-DESCRIPTION = "Generic Linux mainline kernel"
+DESCRIPTION = "Generic Linux Stable RC 4.20 LTS kernel"
 
 PV = "4.20+git${SRCPV}"
 SRCREV_kernel = "8fe28cb58bcb235034b64cbbb7550a8a43fd88be"
 SRCREV_FORMAT = "kernel"
 
 SRC_URI = "\
-    git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;protocol=https;branch=master;name=kernel \
+    git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git;protocol=https;branch=linux-4.20.y;name=kernel \
     file://lkft.config;subdir=git/kernel/configs \
     file://distro-overrides.config;subdir=git/kernel/configs \
     file://systemd.config;subdir=git/kernel/configs \
@@ -112,7 +112,7 @@ do_deploy_append() {
     # |   File "/usr/bin/skales/dtbTool", line 239, in __init__
     # |     self.msm_id[0] = soc_ids[matches['soc']] | (foundry << 16)
     # | KeyError: u'ipq8074'
-    ( cd ${B}/arch/arm64/boot/dts/qcom/ && rm -vf *ipq8074* *qcs404* *sdm845* ) || true
+    ( cd ${B}/arch/arm64/boot/dts/qcom/ && rm -vf *ipq8074* *sdm845* ) || true
 }
 
 require machine-specific-hooks.inc
